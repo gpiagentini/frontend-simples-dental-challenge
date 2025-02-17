@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="album-general-info">
+    <div class="album-info">
+        <mat-progress-bar *ngIf="loadingAlbum" mode="indeterminate"></mat-progress-bar>
+        <div class="info">
+            <b>Id Album: </b>
+            <span>{{albumId}}</span>
+        </div>
+        <div class="info" *ngIf="album">
+            <b>Id Usuário: </b>
+            <span>{{album.userId}}</span>
+        </div>
+        <div class="info" *ngIf="album">
+            <b>Título: </b>
+            <span>{{album.title}}</span>
+        </div>
+        <div class="info" *ngIf="!album">
+            <p>Este álbum não existe</p>
+        </div>
+    </div>
+</div>
+
+<div class="album-photos-container">
+    <mat-progress-bar *ngIf="loadingPhotos" mode="indeterminate"></mat-progress-bar>
+    <h3> Fotos </h3>
+    <mat-grid-list *ngIf="photos.length != 0 && !loadingPhotos" [cols]="totalColumns" rowHeight="250px"
+        gutterSize="10px" (window:resize)="handleSize($event)">
+        <mat-grid-tile *ngFor="let photo of photos" [colspan]="1" [rowspan]="1">
+            <app-thumbnail class="album" [albumTitle]="photo.title" [thumbnailUrl]="photo.thumbnailUrl"
+                [photoTitle]="photo.title"></app-thumbnail>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div *ngIf="photos.length == 0 && !loadingPhotos" class="no-photos">
+        <p>Este álbum não possui fotos</p>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+$breakpoints: (
+  'mobile': 600px,
+  'tablet': 1024px,
+  'desktop': 1280px
+);
+
+@mixin media-query($device) {
+  @if map-has-key($breakpoints, $device) {
+    $size: map-get($breakpoints, $device);
+    @media (max-width: $size) {
+      @content;
+    }
+  }
+}

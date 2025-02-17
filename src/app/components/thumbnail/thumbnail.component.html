@@ -1,0 +1,10 @@
+<mat-card class="album-card" [matTooltip]="albumTitle" appearance="outlined">
+    <mat-card-header class="album-header">
+        <img mat-card-image [src]="thumbnailUrl" width="150" height="150" alt="Thumbnail do álbum">
+    </mat-card-header>
+    <mat-card-content class="album-content">
+        <p class="album-title">
+            {{albumTitle}}
+        </p>
+    </mat-card-content>
+</mat-card>

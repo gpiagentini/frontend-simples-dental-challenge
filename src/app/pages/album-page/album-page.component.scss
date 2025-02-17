@@ -1,0 +1,25 @@
+.album-general-info {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.info {
+    margin: 10px 0 10px 0;
+}
+
+.album-photos-container {
+    text-align: center;
+    border-top: 3px solid rgb(255, 186, 122);
+    padding: 15px;
+}
+
+.photos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px;
+}

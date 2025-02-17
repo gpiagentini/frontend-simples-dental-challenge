@@ -1,0 +1,23 @@
+.album-card {
+    width: 100%;
+    height: 100%;
+}
+
+.album-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.album-content {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.album-title {
+    width: 150px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,16 @@
+<div class="login-container">
+    <div class="login-box">
+        <img src="simplesdental-logo.png" alt="Logo Simples Dental" width="300" class="logo"/>
+        <form class="login-form">
+            <mat-form-field>
+                <mat-label>Login</mat-label>
+                <input matInput [(ngModel)]="login" placeholder="Login" name="login" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Senha</mat-label>
+                <input matInput [(ngModel)]="password" type="password" placeholder="Senha" name="password" (keydown.enter)="doLogin()"/>
+            </mat-form-field>
+        </form>
+        <button mat-raised-button (click)="doLogin()" color="primary">Acessar</button>
+    </div>
+</div>

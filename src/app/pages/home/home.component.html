@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+<div class="content">
+    <mat-grid-list [cols]="totalColumns" rowHeight="250px" gutterSize="10px" (window:resize)="handleSize($event)">
+        <mat-grid-tile *ngFor="let album of albums" [colspan]="1" [rowspan]="1">
+            <app-thumbnail class="album" 
+            [albumTitle]="album.title" 
+            [thumbnailUrl]="album.firstPhoto.thumbnailUrl" 
+            [photoTitle]="album.firstPhoto.title" 
+            (click)="goToList(album)" [matTooltip]="album.title"></app-thumbnail>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
