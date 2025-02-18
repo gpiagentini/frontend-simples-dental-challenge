@@ -1,59 +1,73 @@
-# FrontendSimplesDentalChallenge
+# Simples Dental Challenge Frontend 
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.0.
+## Overview do Projeto
 
-## Development server
+Projeto feito para o Challenge de FullStack da Simples Dental.
 
-To start a local development server, run:
+- Angular 19
+- Node 22.13
+- Angular Materials 19.1.4
 
-```bash
-ng serve
-```
+## Descrição Funcional
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O desafio é a criação de uma interface, com autenticação feita em localStorage, para buscar uma lista de álbuns e exibir as 10 primeiras fotos da lista.
 
-## Code scaffolding
+### Autenticação
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+A autenticação é realizada por meio do localStorage. 
+Automaticamente é feito o registro de um usuário:
 
-```bash
-ng generate component component-name
-```
+- login: admin
+- password: admin
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Uma vez autenticado, o usuário tem 10 minutos para utilizar a aplicação antes da expiração da autenticação. Quando expirada, o usuário é redirecionado para a tela de login para fazer a autenticação novamente.
 
-```bash
-ng generate --help
-```
+### Busca de álbuns
 
-## Building
+Utilizamos o endereço https://jsonplaceholder.typicode.com/albums para buscar os álbuns disponíveis. 
+Cada álbum vai ter uma lista de fotos disponíveis, porém durante a exibição dos álbuns, teremos apenas o primeiro thumbnail representando o álbum.
 
-To build the project run:
+### Busca de fotos
 
-```bash
-ng build
-```
+Quando selecionamos um álbum, vamos para uma tela específica, onde temos dados do álbum e uma lista com as 10 primeiras fotos do álbum.
+As fotos podem ser buscadas no endereço https://jsonplaceholder.typicode.com/photos.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Considerações
 
-## Running unit tests
+Durante a busca das fotos, no endereço https://jsonplaceholder.typicode.com/photos, não consegui retornar as imagens no url retornado, por exemplo https://via.placeholder.com/150/92c952. Acredito que o endereço não esteja mais ativo.
+Para poder dar continuidade, realizar um mapeamento do <b>via.placeholder.com </b> para o <b>placehold.co</b>, mantendo o tamanho e cores originais.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Building and Run
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Antes de começar a testar a aplicação, devemos instalar as dependências com:
 
 ```bash
-ng e2e
+npm i
 ```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Depois de instalado, podemos rodar o seguinte comando, para rodar a aplicação em ambiente de desenvolvimento:
 
-## Additional Resources
+```bash
+npm run start
+```
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para fazer o build da aplicação, podemos rodar o comando abaixo:
+
+```bash
+npm run build
+```
+Esse comando irá gerar os arquivos necessários para deploy da aplicação, em /dist/frontend-simples-dental-challenge/browser.
+
+## Contatos e Feedbacks
+
+Agradeceria muito qualquer comentário/feedbacks/melhorias sobre o challenge acima.
+
+Seguem dados de contato
+- E-mail: gmtpiagentini@gmail.com
+- Celular: (11) 99511-7433
+- Site pessoal: www.gpiagentini.com
+
+Muito obrigado pela oportunidade!
+
