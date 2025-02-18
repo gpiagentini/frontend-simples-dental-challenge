@@ -11,14 +11,14 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) { }
+  constructor(private readonly router: Router) { }
 
   logout() {
     localStorage.removeItem('loginData');
     this.router.navigate(['/login']);
   }
 
-  loadAllAlbums() {
+  loadAllAlbumsRoute() {
     this.router.navigate(['/albums']);
   }
 

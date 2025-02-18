@@ -3,6 +3,9 @@ import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, throwError } from 'rxjs';
 
+/*
+  Interceptor responsible for logging any request errors.
+*/
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   const snackBar = inject(MatSnackBar);

@@ -26,12 +26,14 @@ export class AlbumPageComponent implements OnInit {
   loadingAlbum: boolean = true;
   totalColumns: number = 0;
 
-
-  constructor(private readonly route: ActivatedRoute, private readonly albumService: AlbumService,
-    private readonly gridColumnService: GridColumnService) {
+  constructor(private readonly route: ActivatedRoute, private readonly albumService: AlbumService, private readonly gridColumnService: GridColumnService) {
     this.totalColumns = this.gridColumnService.getColumnsBySize(window.innerWidth);
   }
 
+  /* 
+    - Gets the album id from the route.
+    - Loads the album info and photos, based on the id.
+  */
   ngOnInit() {
     this.albumId = this.route.snapshot.paramMap.get('id') ?? '';
     if (history.state.album) {
@@ -41,6 +43,13 @@ export class AlbumPageComponent implements OnInit {
     else
       this.loadAlbumInfo(parseInt(this.albumId));
     this.albumService.getPhotosByAlbumId(parseInt(this.albumId)).subscribe(this.loadPhotos);
+  }
+
+  /*
+    Handles the window resize event, to update the number of columns in the grid.
+  */
+  handleSize(event: any) {
+    this.totalColumns = this.gridColumnService.getColumnsBySize(event.target.innerWidth);
   }
 
   private readonly loadPhotos = (photos: Photo[]) => {
@@ -54,10 +63,6 @@ export class AlbumPageComponent implements OnInit {
         this.album = album
         this.loadingAlbum = false
       })
-  }
-
-  handleSize(event: any) {
-    this.totalColumns = this.gridColumnService.getColumnsBySize(event.target.innerWidth);
   }
 
 }

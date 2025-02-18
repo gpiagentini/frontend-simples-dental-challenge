@@ -11,6 +11,9 @@ export class GridColumnService {
     return this.getTotalColumnsBySize(size);
   }
 
+  /*
+    Returns the number of desired columns based on the window size.
+  */
   private getTotalColumnsBySize(size: number): number {
     if (size < 500)
       return 1;

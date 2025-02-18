@@ -16,6 +16,9 @@ export class AlbumService {
   constructor(private readonly http: HttpClient) {
   }
 
+  /* 
+    Getting all albums and their first photo.
+  */
   public getAllAbums(): Observable<Album[]> {
     return this.getAlbums().pipe(
       switchMap(albums => {
@@ -29,25 +32,16 @@ export class AlbumService {
     );
   }
 
+  /*
+    Getting all photos from an album.
+  */
   public getPhotosByAlbumId(albumId: number): Observable<Photo[]> {
     return this.getAlbumPhotos(albumId);
   }
 
-  private replacePlaceholder(photo: Photo): Photo {
-    const regex = /\/([0-9a-fA-F]{5,6})$/;
-    const match = photo.url.match(regex);
-    if (match) {
-      const color = match[1];
-      photo.url = photo.url.replace("via.placeholder.com", "placehold.co").replace(/\/([0-9a-fA-F]{5,6})$/, `/dddddd/${color}`);
-      photo.thumbnailUrl = photo.thumbnailUrl.replace("via.placeholder.com", "placehold.co").replace(/\/([0-9a-fA-F]{5,6})$/, `/dddddd/${color}`);
-    }
-    return photo;
-  }
-
-  private getAlbums(): Observable<Album[]> {
-    return this.http.get<Album[]>(this.albumsRoute).pipe(retry(3));
-  }
-
+  /*
+    Getting an album by its id.
+  */
   public getAlbumById(albumId: number): Observable<Album | null> {
     return this.http.get<Album>(this.albumsRoute + "/" + albumId).pipe(
       retry(3),
@@ -57,6 +51,9 @@ export class AlbumService {
     );
   }
 
+  /* 
+    Getting the first 10 photos from an album.
+  */
   public getAlbumPhotos(albumId: number): Observable<Photo[]> {
     return this.http.get<Photo[]>(this.photosRoute + "?albumId=" + albumId)
       .pipe(
@@ -67,15 +64,39 @@ export class AlbumService {
       );
   }
 
-  public getAlbumFirstPhoto(albumId: number): Observable<Photo> {
-    return this.http.get<Photo[]>(this.photosRoute + "?albumId=" + albumId)
-      .pipe(
-        retry(3),
-        filter(photos => photos.length > 0),
-        map(photos => {
-          photos[0] = this.replacePlaceholder(photos[0]);
-          return photos[0];
-        })
-      );
+  /*
+    Getting the first photo from an album.
+  */
+  private getAlbumFirstPhoto(albumId: number): Observable<Photo> {
+    return this.http.get<Photo[]>(this.photosRoute + "?albumId=" + albumId).pipe(
+      retry(3),
+      filter(photos => photos.length > 0),
+      map(photos => {
+        photos[0] = this.replacePlaceholder(photos[0]);
+        return photos[0];
+      })
+    );
+  }
+
+  /*
+    Getting all albums.
+  */
+  private getAlbums(): Observable<Album[]> {
+    return this.http.get<Album[]>(this.albumsRoute).pipe(retry(3));
+  }
+
+  /*
+    Replaces the placeholder url for one that is working.
+    Replaces via.placeholder.com for placehold.co, keeping the original colors.
+  */
+  private replacePlaceholder(photo: Photo): Photo {
+    const regex = /\/([0-9a-fA-F]{5,6})$/;
+    const match = photo.url.match(regex);
+    if (match) {
+      const color = match[1];
+      photo.url = photo.url.replace("via.placeholder.com", "placehold.co").replace(/\/([0-9a-fA-F]{5,6})$/, `/dddddd/${color}`);
+      photo.thumbnailUrl = photo.thumbnailUrl.replace("via.placeholder.com", "placehold.co").replace(/\/([0-9a-fA-F]{5,6})$/, `/dddddd/${color}`);
+    }
+    return photo;
   }
 }

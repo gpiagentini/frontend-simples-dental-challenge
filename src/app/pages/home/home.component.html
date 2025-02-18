@@ -8,7 +8,7 @@
             [albumTitle]="album.title" 
             [thumbnailUrl]="album.firstPhoto.thumbnailUrl" 
             [photoTitle]="album.firstPhoto.title" 
-            (click)="goToList(album)" [matTooltip]="album.title"></app-thumbnail>
+            (click)="goToAlbumSpecificPage(album)" [matTooltip]="album.title"></app-thumbnail>
         </mat-grid-tile>
     </mat-grid-list>
 </div>

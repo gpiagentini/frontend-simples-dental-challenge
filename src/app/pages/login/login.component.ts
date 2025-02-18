@@ -25,6 +25,10 @@ export class LoginComponent implements OnInit {
   constructor(private readonly router: Router) {
   }
 
+  /*
+    - Saves the default credentials in the local storage.
+    - Checks if if we have any valid login data stored.
+  */
   ngOnInit(): void {
     if (localStorage.getItem('credentials') === null)
       localStorage.setItem('credentials', JSON.stringify(new Credentials('admin', 'admin')));
@@ -38,13 +42,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /*
+    - Save the login data in the local storage and navigate to the albums page, if credentials are correct.
+  */
   doLogin() {
     const localCredentailsJson: string | null = localStorage.getItem('credentials');
     if (localCredentailsJson) {
       const credentials: Credentials = JSON.parse(localCredentailsJson);
       if (credentials.login === this.login && credentials.password === this.password) {
         this._snackBar.open('Login efetuado com sucesso!', 'Fechar', { duration: 2000, });
-        let expirationTime = new Date().getTime() + 1000 * 60 * 10; // 10 minutos
+        let expirationTime = new Date().getTime() + 1000 * 60 * 10; // 10 minutes
         localStorage.setItem('loginData', JSON.stringify(new LoginData(this.login, expirationTime)));
         this.router.navigate(['/albums']);
       }

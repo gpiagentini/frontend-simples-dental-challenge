@@ -30,14 +30,20 @@ export class HomeComponent implements OnInit {
     this.totalColumns = this.gridColumnService.getColumnsBySize(window.innerWidth);
   }
 
+  /*
+    Loads all albums from the album service.
+  */
   ngOnInit() {
     this.albumService.getAllAbums().subscribe(this.loadAlbums);
   }
 
-  goToList(album: Album) {
+  goToAlbumSpecificPage(album: Album) {
     this.router.navigate(["/albums", album.id], { state: { album } });
   }
 
+  /*
+    Handles the window resize event, to update the number of columns in the grid
+  */
   handleSize(event: any) {
     this.totalColumns = this.gridColumnService.getColumnsBySize(event.target.innerWidth);
   }
